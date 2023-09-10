@@ -21,21 +21,28 @@ def soup_to_text():
     song_a = words.index("When")
     song_z = words.index("Submit")
     song = words[song_a:song_z]
+    return (song)
     
-    print(song)
     #song = words[44:319]
 
 ### write loop for the party in song
-            
- 
 soup_to_text()
+song = soup_to_text()
 
+def party_harty():
+    for party in song:
+        if party == "party":
+            print("party")
+
+        
+        
 its_time_to_party = input("Are you a party animal? 'Y' or 'N'")
 we_will_party_hard = None
 
 class PartyAnimal():
     def party(self):
         print("When it's time to party we will party hard.")
+        party_harty()
         
     def noparty(self):
         print("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
