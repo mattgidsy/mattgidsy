@@ -18,7 +18,12 @@ def soup_to_text():
     soup = BeautifulSoup(html, 'html.parser')
     text = soup.get_text()
     words = text.split()
-    song = words[44:319]
+    song_a = words.index("When")
+    song_z = words.index("Submit")
+    song = words[song_a:song_z]
+    
+    print(song)
+    #song = words[44:319]
 
 ### write loop for the party in song
             
