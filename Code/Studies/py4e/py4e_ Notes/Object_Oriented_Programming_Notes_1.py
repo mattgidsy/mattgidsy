@@ -61,7 +61,6 @@ study_room.length = 42.5
 study_room.width = 30.8
 
 print(f"Area is = ", study_room.calculate_area())
-
-print(f"================= Method printing as part of the method ====================")
-
+ 
 study_room.calculate_area2()
+#just adding to see if we broke everything
