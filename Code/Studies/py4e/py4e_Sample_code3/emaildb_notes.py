@@ -25,6 +25,7 @@ for line in fh:
     # cur is opening a record set
     cur.execute('SELECT count FROM Counts WHERE email = ? ', (email,))
     row = cur.fetchone()
+    print(row)
     
     #this is us initiatng a count, we are making a count to index
     #this is going to spit us out an indexed tuple (email,1)
