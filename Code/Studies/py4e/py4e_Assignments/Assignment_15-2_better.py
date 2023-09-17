@@ -21,18 +21,18 @@ def search_split():
         curse.execute('SELECT count FROM Orgs WHERE org =? ', (org,))
         row = curse.fetchone()
         commit_count = commit_count +1
-        if commit_count == 10:
+        if commit_count == 1:
             connector.commit()
-            commit_count = 0
+            #commit_count = 0
         elif row is None:
             curse.execute('INSERT INTO Orgs (org, count) VALUES (?,1)', (org,))
         else:
-            curse.execute('UPDATE Orgs SET count = count +1 WHERE org = ?', (org,))
-       
-
+            curse.execute('UPDATE Orgs SET count = count +1 WHERE org = ?', (org,))       
+    print('Commit count:',commit_count)
 
 search_split()
 sqlstr = 'SELECT org, count FROM Orgs ORDER BY count DESC LIMIT 10'
 
 for row in curse.execute(sqlstr):
     print(str(row[0]), row[1]) 
+    
