@@ -1,8 +1,8 @@
 import sqlite3
 
 
-connector = sqlite3.connect('orgdb_fast')
-curse = connector.cursor()
+con = sqlite3.connect('orgdb_fast')
+curse = con.cursor()
 curse.execute('DROP TABLE IF EXISTS Orgs')
 curse.execute('CREATE TABLE Orgs (org TEXT, count INTERGER)')
 
@@ -22,7 +22,7 @@ def search_split():
         row = curse.fetchone()
         commit_count = commit_count +1
         if commit_count == 1:
-            connector.commit()
+            con.commit()
             #commit_count = 0
         elif row is None:
             curse.execute('INSERT INTO Orgs (org, count) VALUES (?,1)', (org,))
