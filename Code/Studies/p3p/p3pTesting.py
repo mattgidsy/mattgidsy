@@ -1,15 +1,5 @@
+lett = ""
 
-by = "You are"
-az = "doing a great "
-io = "job"
-qy = "keep it up!"
-
-msglist = list()
-thing = by + az + io + qy
-for word in thing:
-    word.split()
-    msglist.append(word)
-    
-message = " ".join(msglist)
-
-print(msglist)
+for _ in range(7):
+    lett = lett + "b"
+print(lett)

@@ -48,5 +48,6 @@ def txt(self):
     
 draw_heart(turtle_name)
 txt(turtle_name)
+turtle_name.hideturtle()
 print(turtle_str, "made you a drawing")
 wn.exitonclick()                # wait for a user click on the canvas
