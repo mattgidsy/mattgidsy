@@ -1,9 +1,7 @@
 with open("Code\Studies\p3p\scarlet.txt") as scarlet:
     cont = scarlet.read()
 count_dict = {}
-
 for char in cont:
-    
     if char not in count_dict:
         count_dict[char] = 0
     
