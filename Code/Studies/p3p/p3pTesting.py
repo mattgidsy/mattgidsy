@@ -1,6 +1,7 @@
-def test(i, b = True, dict1 = {2:3, 4:5, 6:8}):
-    if b == True:
-        if i in dict1.keys():
-            return dict1[:i]
-    else:
-        return b == False
+ex_lst = ['hi', 'how are you', 'bye', 'apple', 'zebra', 'dance']
+def lst_search(lst):
+    for word in lst:
+        return word[1]
+    
+lambda_sort = sorted(ex_lst, key= lambda x: lst_search(x))
+print(lambda_sort)
