@@ -6,7 +6,7 @@ class Cereal:
     def __str__(self):
         return f"{self.n} cereal is produced by {self.b} and has {self.f} grams of fiber in every serving!"
 
-c1 = Cereal("Cornflakes", "Kellog's", '2')
+c1 = Cereal("Corn Flakes", "Kellogg's", '2')
 c2 = Cereal('Honey Nut Cheerios', 'General Mills', '3')
 
 print(c1)
