@@ -17,7 +17,7 @@ class WOFPlayer():
         self.prizeMoney = 0
     
     def addPrize(self, prize):
-        self.prizes.append(prize)
+        self.prizes.append(self.prize)
     
     def __str__(self):
         return f"{self.name} (${self.prizeMoney})"
@@ -41,13 +41,14 @@ class WOFComputerPlayer(WOFHumanPlayer):
         else:
             return True
     def getPossibleLetters(self,guessed):
-        #con_LETTERS = "BCDFGHJKLMNPQRSTVWXYZ"
         guess_lst = []
         if self.prizeMoney < VOWEL_COST:
             for c in LETTERS:
-                if c not in guessed and c not in VOWELS:
+                if c in guessed and c not in VOWELS:
+                    return 'pass'
+                else:
                     guess_lst.append(c)
-            return guess_lst
+                return guess_lst
         else:
             for c in LETTERS:
                 if c not in guessed:
@@ -61,7 +62,7 @@ class WOFComputerPlayer(WOFHumanPlayer):
                 letters = [letter for letter in LETTERS]
                 return random.choice(letters)
             else:
-                for char in self.SORTED_FREQUENCIES: 
+                for char in reversed(self.SORTED_FREQUENCIES): 
                     if char in self.getPossibleLetters(guessed):
                         return char
                     
