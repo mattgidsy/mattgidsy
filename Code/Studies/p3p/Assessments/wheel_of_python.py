@@ -1,9 +1,10 @@
 import json
 import random
 import time
+import os
 #import sys
 #sys.setExecutionLimit(600000) # let this take up to 10 minutes
-
+print("Current working directory:", os.getcwd())
 VOWEL_COST = 250
 LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 VOWELS = 'AEIOU'
@@ -98,7 +99,7 @@ def getNumberBetween(prompt, min, max):
 #    { "type": "bankrupt", "text": "Bankrupt", "prize": false },
 #    { "type": "loseturn", "text": "Lose a turn", "prize": false }
 def spinWheel():
-    with open("Code\Studies\p3p\Assessments\wheel.json", 'r') as f:
+    with open("wheel.json", 'r') as f:
         wheel = json.loads(f.read())
         return random.choice(wheel)
 
@@ -106,7 +107,7 @@ def spinWheel():
 # Example:
 #     ("Artist & Song", "Whitney Houston's I Will Always Love You")
 def getRandomCategoryAndPhrase():
-    with open("Code\Studies\p3p\Assessments\phrases.json", 'r') as f:
+    with open("phrases.json", 'r') as f:
         phrases = json.loads(f.read())
 
         category = random.choice(list(phrases.keys()))
