@@ -19,6 +19,8 @@ possible_tups = []
 #    return guessed_position
     
 def check_correct_position(guess,guess_cl):
+    global possible_tups
+    temp_tup_list = []
     # Create a list of  letter, index) tuples for the guessed letters
     if any(letter.isupper() for letter in guess) and len(possible_tups) == 0:
         guessed_positions = [(char.lower(), index) for index, char in enumerate(guess) if char.isupper()]
@@ -31,12 +33,14 @@ def check_correct_position(guess,guess_cl):
         for word, letters in possible_tups:
             # Check if all guessed letters are in the correct positions
             if all((g, i) in guessed_positions and g == letters[i] for g, i in guessed_positions):
-                possible_tups.append((word, letters))
+                temp_tup_list.append((word, letters))
+        possible_tups = temp_tup_list
     else: 
         pass
         
 def check_correct_letter(guess, guess_cl):
     guess_letters = list(guess_cl)
+    # I know it's yucky but I don't know another way.
     global possible_tups
     temp_tup_list = []
     if len(possible_tups) == 0:
@@ -75,10 +79,28 @@ def get_started():
     print("\n   ###### Welcome to Wordle_Helper_Bot! ######")
     guess1 = input("\nInput your first guess:\n")
     guess1_cl = input("\nWhich letters are in the word but out of position?:\n")
-    #code works for either but not both together. brain is fried, will fix in the morning. maybe inf loop?
-    #check_upper(guess1, guess1_cl)
     check_correct_position(guess1,guess1_cl)
     check_correct_letter(guess1,guess1_cl)
-    possible_guess_results()  
-     
+    possible_guess_results() 
+    ##code works for either but not both together. brain is fried, will fix in the morning. maybe inf loop?
+    guess1= input("\nInput your second guess:\n")
+    guess1_cl = input("\nWhich letters are in the word but out of position?:\n")
+    check_correct_position(guess1,guess1_cl)
+    check_correct_letter(guess1,guess1_cl)
+    possible_guess_results()
+    guess1= input("\nInput your second guess:\n")
+    guess1_cl = input("\nWhich letters are in the word but out of position?:\n")
+    check_correct_position(guess1,guess1_cl)
+    check_correct_letter(guess1,guess1_cl)
+    possible_guess_results() 
+    guess1= input("\nInput your second guess:\n")
+    guess1_cl = input("\nWhich letters are in the word but out of position?:\n")
+    check_correct_position(guess1,guess1_cl)
+    check_correct_letter(guess1,guess1_cl)
+    possible_guess_results() 
+    guess1= input("\nInput your second guess:\n")
+    guess1_cl = input("\nWhich letters are in the word but out of position?:\n")
+    check_correct_position(guess1,guess1_cl)
+    check_correct_letter(guess1,guess1_cl)
+    possible_guess_results()     
 get_started()
