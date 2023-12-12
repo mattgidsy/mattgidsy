@@ -2,36 +2,37 @@
 with open("Code\Wordle_bot\guess_list.txt") as guess_list:
     lines = guess_list.readlines()
 
-    
+#iterate through the word list (this one contains 5 letter words for wordle)   
 word_list = [word.strip() for word in lines]
+#create word tuples to use for parsing ie: ('apple', ['a','p','p','l','e'])
 word_tuples = [(word, list(word)) for word in word_list]
 possible_guess_lst = []
 possible_tups = []
 
-#Need to write 4 searches
+#Need to write 4 searches for wordle solving
 #correct letter(s) placement
 #correct letter(s)
 #excluded letter(s)
 #incorrect placement
+#exclude the guessed word - maybe i can add this to one of the 4 searches
                
-# def check_guessed_position(guess,guess_cl):
-#    guessed_position = [(index, letter.lower()) for index, letter in enumerate(guess)]
-#    return guessed_position
     
-def check_correct_position(guess,guess_cl):
+def check_correct_position(guess,guess_cl): 
     global possible_tups
     temp_tup_list = []
-    # Create a list of  letter, index) tuples for the guessed letters
+    #check if there are any uppercase letters and if possible_tups is empty
     if any(letter.isupper() for letter in guess) and len(possible_tups) == 0:
+        #index the guessed word's letters for parsing
         guessed_positions = [(char.lower(), index) for index, char in enumerate(guess) if char.isupper()]
+        #search word_tuples
         for word, letters in word_tuples:
             # Check if all guessed letters are in the correct positions
             if all((g, i) in guessed_positions and g == letters[i] for g, i in guessed_positions):
                 possible_tups.append((word, letters))
     elif any(letter.isupper() for letter in guess) and len(possible_tups) > 0:
         guessed_positions = [(char.lower(), index) for index, char in enumerate(guess) if char.isupper()]
+        #if word not in possible_tups append to a temp list and replace global list to deduce
         for word, letters in possible_tups:
-            # Check if all guessed letters are in the correct positions
             if all((g, i) in guessed_positions and g == letters[i] for g, i in guessed_positions):
                 temp_tup_list.append((word, letters))
         possible_tups = temp_tup_list
@@ -40,7 +41,7 @@ def check_correct_position(guess,guess_cl):
         
 def check_correct_letter(guess, guess_cl):
     guess_letters = list(guess_cl)
-    # I know it's yucky but I don't know another way.
+    # I know it's yucky to use global but I don't know another way.
     global possible_tups
     temp_tup_list = []
     if len(possible_tups) == 0:
@@ -55,8 +56,7 @@ def check_correct_letter(guess, guess_cl):
         for word, letters in possible_tups:
             # Check if at least one of the specified letters is present in the word
             if all(char in word for char in guess_letters):
-                #if word not in possible_tups:
-                # If true, append the word to the filtered list if it's not there
+                #if word not in possible_tups append to a temp list and replace global list to deduce
                 temp_tup_list.append((word,letters))
         possible_tups = temp_tup_list
                                          
@@ -67,40 +67,31 @@ def possible_guess_results():
             get_started()
         else:
             quit()
+    elif len(possible_tups) == 1:
+        possible_results = [word for word, _ in possible_tups]
+        print(f"   *:.Congratuations!.:*\n\n {possible_results} is your answer! \n        ... right?")
+        quit()
     else:
         possible_results = []
         for word, letters in possible_tups:
             possible_results.append(word)
         print(possible_results)
-            
+        
+def ask_guess():
+    for i in range(5):
+        guess = input("\nInput your 5 letter guess:\n")
+        if guess == "quit":
+            quit()
+        guess_cl = input("\nWhich letters are in the word but out of position?:\n")
+        if guess_cl == 'quit':
+            quit()
+        check_correct_position(guess,guess_cl)
+        check_correct_letter(guess,guess_cl)
+        possible_guess_results()
 
 def get_started():
-    print("\n   ###### Welcome to Wordle_Helper_Bot! ###### \n\nInput all incorretly positioned letters in lowercase \n   Input correctly positioned letters in UPPERCASE")
+    print("\n   ###### Welcome to Wordle_Helper_Bot! ###### \n\nInput all incorretly positioned letters in lowercase \n   Input correctly positioned letters in UPPERCASE\n      Type 'quit' to exit")
     print("\n   ###### Welcome to Wordle_Helper_Bot! ######")
-    guess1 = input("\nInput your first guess:\n")
-    guess1_cl = input("\nWhich letters are in the word but out of position?:\n")
-    check_correct_position(guess1,guess1_cl)
-    check_correct_letter(guess1,guess1_cl)
-    possible_guess_results() 
-    ##code works for either but not both together. brain is fried, will fix in the morning. maybe inf loop?
-    guess1= input("\nInput your second guess:\n")
-    guess1_cl = input("\nWhich letters are in the word but out of position?:\n")
-    check_correct_position(guess1,guess1_cl)
-    check_correct_letter(guess1,guess1_cl)
-    possible_guess_results()
-    guess1= input("\nInput your second guess:\n")
-    guess1_cl = input("\nWhich letters are in the word but out of position?:\n")
-    check_correct_position(guess1,guess1_cl)
-    check_correct_letter(guess1,guess1_cl)
-    possible_guess_results() 
-    guess1= input("\nInput your second guess:\n")
-    guess1_cl = input("\nWhich letters are in the word but out of position?:\n")
-    check_correct_position(guess1,guess1_cl)
-    check_correct_letter(guess1,guess1_cl)
-    possible_guess_results() 
-    guess1= input("\nInput your second guess:\n")
-    guess1_cl = input("\nWhich letters are in the word but out of position?:\n")
-    check_correct_position(guess1,guess1_cl)
-    check_correct_letter(guess1,guess1_cl)
-    possible_guess_results()     
+    ask_guess() 
+ 
 get_started()
