@@ -14,26 +14,32 @@ possible_tups = []
 #excluded letter(s)
 #incorrect placement
                
-def check_correct_position(guess, guess_cl):
-    # Create a list of (lowercase letter, index) tuples for the guessed letters
-    guessed_position = [(char.lower(), index) for index, char in enumerate(guess) if char.isupper()]
-    #this won't work,need to spend more time thinking about it.
-    if len(possible_tups) == 0:
+# def check_guessed_position(guess,guess_cl):
+#    guessed_position = [(index, letter.lower()) for index, letter in enumerate(guess)]
+#    return guessed_position
+    
+def check_correct_position(guess,guess_cl):
+    # Create a list of  letter, index) tuples for the guessed letters
+    if any(letter.isupper() for letter in guess) and len(possible_tups) == 0:
+        guessed_positions = [(char.lower(), index) for index, char in enumerate(guess) if char.isupper()]
         for word, letters in word_tuples:
-            # Check if all guessed letters are in the correct position
-            if all((g, i) in guessed_position and i < len(letters) and g == letters[i] for g, i in guessed_position) and (word, letters) not in possible_tups:
+            # Check if all guessed letters are in the correct positions
+            if all((g, i) in guessed_positions and g == letters[i] for g, i in guessed_positions):
                 possible_tups.append((word, letters))
-    elif len(possible_tups) >0 :
+    elif any(letter.isupper() for letter in guess) and len(possible_tups) > 0:
+        guessed_positions = [(char.lower(), index) for index, char in enumerate(guess) if char.isupper()]
         for word, letters in possible_tups:
-            # Check if all guessed letters are in the correct position
-            if all((g, i) in guessed_position and i < len(letters) and g == letters[i] for g, i in guessed_position) and (word, letters) not in possible_tups:
+            # Check if all guessed letters are in the correct positions
+            if all((g, i) in guessed_positions and g == letters[i] for g, i in guessed_positions):
                 possible_tups.append((word, letters))
-    else:
+    else: 
+        pass
         
-                              
 def check_correct_letter(guess, guess_cl):
     guess_letters = list(guess_cl)
-    if possible_tups == []:
+    global possible_tups
+    temp_tup_list = []
+    if len(possible_tups) == 0:
         for word, letters in word_tuples:
             # Check if at least one of the specified letters is present in the word
             if all(char in word for char in guess_letters):
@@ -41,15 +47,17 @@ def check_correct_letter(guess, guess_cl):
                 # If true, pend the word to the filtered list if it's not there
                     possible_tups.append((word,letters))
     else:
+        #create a new list and replace possible tups 
         for word, letters in possible_tups:
             # Check if at least one of the specified letters is present in the word
             if all(char in word for char in guess_letters):
-                if word not in possible_tups:
+                #if word not in possible_tups:
                 # If true, append the word to the filtered list if it's not there
-                    possible_tups.append((word,letters))
-
+                temp_tup_list.append((word,letters))
+        possible_tups = temp_tup_list
+                                         
 def possible_guess_results():
-    if possible_tups == []:
+    if len(possible_tups) == 0:
         try_again = input("\nHow do I say this? \nI have failed you, there are no possible answers.\nTry again? [Y/N]: ")
         if try_again == "Y" or try_again == 'y':
             get_started()
@@ -68,9 +76,9 @@ def get_started():
     guess1 = input("\nInput your first guess:\n")
     guess1_cl = input("\nWhich letters are in the word but out of position?:\n")
     #code works for either but not both together. brain is fried, will fix in the morning. maybe inf loop?
+    #check_upper(guess1, guess1_cl)
     check_correct_position(guess1,guess1_cl)
     check_correct_letter(guess1,guess1_cl)
-    possible_guess_results()    
-
-
+    possible_guess_results()  
+     
 get_started()
