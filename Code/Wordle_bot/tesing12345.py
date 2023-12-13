@@ -43,4 +43,5 @@ def get_started():
         if possible_guess_results(possible_tups):
             break
 
-get_started()
+#get_started()
+

@@ -14,10 +14,16 @@ possible_tups = []
 #correct letter(s)
 #excluded letter(s)
 #incorrect placement
-#exclude the guessed word - maybe i can add this to one of the 4 searches
-               
+
+def exclude_letter(guess, guess_cl):
+    global possible_tups
+
+    excluded_letters = [letter for letter in guess if letter.islower() and letter not in guess_cl]
+
+    # Create a new list with tuples that do not contain any of the excluded letters
+    possible_tups = [(word, letters) for word, letters in possible_tups if not any(char in word for char in excluded_letters)]       
     
-def check_correct_position(guess,guess_cl): 
+def check_correct_position(guess): 
     global possible_tups
     temp_tup_list = []
     #check if there are any uppercase letters and if possible_tups is empty
@@ -39,7 +45,7 @@ def check_correct_position(guess,guess_cl):
     else: 
         pass
         
-def check_correct_letter(guess, guess_cl):
+def check_correct_letter(guess_cl):
     guess_letters = list(guess_cl)
     # I know it's yucky to use global but I don't know another way.
     global possible_tups
@@ -51,6 +57,7 @@ def check_correct_letter(guess, guess_cl):
                 if word not in possible_tups:
                 # If true, pend the word to the filtered list if it's not there
                     possible_tups.append((word,letters))
+                    
     else:
         #create a new list and replace possible tups 
         for word, letters in possible_tups:
@@ -85,8 +92,9 @@ def ask_guess():
         guess_cl = input("\nWhich letters are in the word but out of position?:\n")
         if guess_cl == 'quit':
             quit()
-        check_correct_position(guess,guess_cl)
-        check_correct_letter(guess,guess_cl)
+        check_correct_position(guess)
+        check_correct_letter(guess_cl)
+        exclude_letter(guess, guess_cl)
         possible_guess_results()
 
 def get_started():
