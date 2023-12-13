@@ -3,8 +3,8 @@ with open("Code\Wordle_bot\guess_list.txt") as guess_list:
     lines = guess_list.readlines()
 
 #iterate through the word list (this one contains 5 letter words for wordle)   
-word_list = [word.strip() for word in lines]
 #create word tuples to use for parsing ie: ('apple', ['a','p','p','l','e'])
+word_list = [word.strip() for word in lines]
 word_tuples = [(word, list(word)) for word in word_list]
 possible_guess_lst = []
 possible_tups = []
@@ -15,7 +15,26 @@ possible_tups = []
 #excluded letter(s)
 #incorrect placement
 
-def exclude_letter(guess, guess_cl):
+def filter_incorrect_positions(guess, guess_cl):
+    global possible_tups
+
+    # Create a list of tuples (letter, index) for each letter in guess_cl and its corresponding index in guess
+    guess_cl_positions = [(char, index) for index, char in enumerate(guess) if char in guess_cl]
+
+    # If there are letters to check in guess_cl and possible_tups is not empty
+    if guess_cl_positions and possible_tups:
+        new_possible_tups = []
+
+        for word, letters in possible_tups:
+            # Check if any of the letters in guess_cl_positions matches the same position in the word
+            # If so, we exclude this word from the new list
+            if not any(word[index] == char for char, index in guess_cl_positions):
+                new_possible_tups.append((word, letters))
+
+        # Update possible_tups with the filtered list
+        possible_tups = new_possible_tups
+        
+def filter_excluded_letter(guess, guess_cl):
     global possible_tups
 
     excluded_letters = [letter for letter in guess if letter.islower() and letter not in guess_cl]
@@ -23,7 +42,7 @@ def exclude_letter(guess, guess_cl):
     # Create a new list with tuples that do not contain any of the excluded letters
     possible_tups = [(word, letters) for word, letters in possible_tups if not any(char in word for char in excluded_letters)]       
     
-def check_correct_position(guess): 
+def filter_correct_position(guess): 
     global possible_tups
     temp_tup_list = []
     #check if there are any uppercase letters and if possible_tups is empty
@@ -45,7 +64,7 @@ def check_correct_position(guess):
     else: 
         pass
         
-def check_correct_letter(guess_cl):
+def filter_correct_letter(guess_cl):
     guess_letters = list(guess_cl)
     # I know it's yucky to use global but I don't know another way.
     global possible_tups
@@ -92,9 +111,10 @@ def ask_guess():
         guess_cl = input("\nWhich letters are in the word but out of position?:\n")
         if guess_cl == 'quit':
             quit()
-        check_correct_position(guess)
-        check_correct_letter(guess_cl)
-        exclude_letter(guess, guess_cl)
+        filter_correct_position(guess)
+        filter_correct_letter(guess_cl)
+        filter_excluded_letter(guess, guess_cl)
+        filter_incorrect_positions(guess, guess_cl)
         possible_guess_results()
 
 def get_started():
