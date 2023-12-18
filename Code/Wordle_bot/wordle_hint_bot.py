@@ -15,6 +15,7 @@ possible_tups = []
 #excluded letter(s)
 #incorrect placement
 
+##having a problem with input: guAva , , I think it has to do with the 2 a's
 def filter_incorrect_positions(guess, guess_cl):
     global possible_tups
 
@@ -33,6 +34,7 @@ def filter_incorrect_positions(guess, guess_cl):
 
         # Update possible_tups with the filtered list
         possible_tups = new_possible_tups
+
         
 def filter_excluded_letter(guess, guess_cl):
     global possible_tups
@@ -74,7 +76,7 @@ def filter_correct_letter(guess_cl):
             # Check if at least one of the specified letters is present in the word
             if all(char in word for char in guess_letters):
                 if word not in possible_tups:
-                # If true, pend the word to the filtered list if it's not there
+                # If true, append the word to the filtered list if it's not there
                     possible_tups.append((word,letters))
                     
     else:
