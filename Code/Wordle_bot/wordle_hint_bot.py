@@ -15,34 +15,58 @@ possible_tups = []
 #excluded letter(s)
 #incorrect placement
 
-##having a problem with input: guAva , , I think it has to do with the 2 a's
+##Debugging##
+#having a problem with input: [slAte, , boArd, , guAva, ,] len(possible_tups) == 0: is triggering after input guAva with no correct letters.
+# in wordle, I should have 2 more guesses "CHAmp" and the correct answer "CHAIN"
+# 'guAva', __ ,  will trigger the bug, at least "champ, chain, slate, board" should all be valid guesses afterward.
+# 'guAva', "a", will return correctish** only 'yaArs', 'smAak' should return but any word with an 'a' in the 'A' position returns <- maybe separate bug
+# 'guAva', __, error only occurs with filter_excluded_letter
+
+
+#for letters that were correct but out of position, remove words with the correct letter's old position
 def filter_incorrect_positions(guess, guess_cl):
     global possible_tups
 
-    # Create a list of tuples (letter, index) for each letter in guess_cl and its corresponding index in guess
-    guess_cl_positions = [(char, index) for index, char in enumerate(guess) if char in guess_cl]
+    # Create the list of tuples (index, letter) for each letter in guess_cl and its corresponding index in guess
+    guess_cl_positions = []
+    for index, char in enumerate(guess):
+        if char in guess_cl:
+            guess_cl_positions.append((index, char))  # Storing as (index, char)
 
     # If there are letters to check in guess_cl and possible_tups is not empty
     if guess_cl_positions and possible_tups:
-        new_possible_tups = []
+        temp_tups_list = []
 
         for word, letters in possible_tups:
-            # Check if any of the letters in guess_cl_positions matches the same position in the word
-            # If so, we exclude this word from the new list
-            if not any(word[index] == char for char, index in guess_cl_positions):
-                new_possible_tups.append((word, letters))
+            # Initialize a flag to indicate a match
+            match = False
+            for index, char in guess_cl_positions:  # Adjusted order here
+                # Check if any of the letters in guess_cl_positions matches the same position in the word
+                if word[index] == char:
+                    match = True
+                    break  # Break the loop if a match is found
+
+            # Add the tuple to temp_tups_list if there is no match
+            if not match:
+                temp_tups_list.append((word, letters))
 
         # Update possible_tups with the filtered list
-        possible_tups = new_possible_tups
+        possible_tups = temp_tups_list
+    else:
+        pass
 
-        
+    
+
+#remove all of the excluded letters (ie: letters not correct or in correct position)        
 def filter_excluded_letter(guess, guess_cl):
     global possible_tups
+    temp_tups = []
 
     excluded_letters = [letter for letter in guess if letter.islower() and letter not in guess_cl]
 
     # Create a new list with tuples that do not contain any of the excluded letters
-    possible_tups = [(word, letters) for word, letters in possible_tups if not any(char in word for char in excluded_letters)]       
+    temp_tups = [(word, letters) for word, letters in possible_tups if not any(char in word for char in excluded_letters)]
+    possible_tups = temp_tups       
     
 def filter_correct_position(guess): 
     global possible_tups
@@ -67,9 +91,9 @@ def filter_correct_position(guess):
         pass
         
 def filter_correct_letter(guess_cl):
-    guess_letters = list(guess_cl)
     # I know it's yucky to use global but I don't know another way.
     global possible_tups
+    guess_letters = list(guess_cl)
     temp_tup_list = []
     if len(possible_tups) == 0:
         for word, letters in word_tuples:
