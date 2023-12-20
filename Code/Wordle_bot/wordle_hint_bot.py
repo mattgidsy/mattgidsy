@@ -55,18 +55,32 @@ def filter_incorrect_positions(guess, guess_cl):
     else:
         pass
 
-    
+def filter_excluded_letter(guess, guess_cl, possible_tups):
+    excluded_letters = set()
+    for letter in guess:
+        if letter.islower() and letter not in guess_cl:
+            excluded_letters.add(letter)
 
-#remove all of the excluded letters (ie: letters not correct or in correct position)        
-def filter_excluded_letter(guess, guess_cl):
-    global possible_tups
+    correct_positions = {index: char.lower() for index, char in enumerate(guess) if char.isupper() and char.lower() in guess_cl}
+
     temp_tups = []
+    for word, letters in possible_tups:
+        if all((char not in excluded_letters and (index not in correct_positions or char == correct_positions[index])) for index, char in enumerate(word)):
+            temp_tups.append((word, letters))
 
-    excluded_letters = [letter for letter in guess if letter.islower() and letter not in guess_cl]
+    return temp_tups    
 
-    # Create a new list with tuples that do not contain any of the excluded letters
-    temp_tups = [(word, letters) for word, letters in possible_tups if not any(char in word for char in excluded_letters)]
-    possible_tups = temp_tups       
+# #working code with bugs 
+# #remove all of the excluded letters (ie: letters not correct or in correct position)        
+# def filter_excluded_letter(guess, guess_cl):
+#     global possible_tups
+#     temp_tups = []
+
+#     excluded_letters = [letter for letter in guess if letter.islower() and letter not in guess_cl]
+
+#     # Create a new list with tuples that do not contain any of the excluded letters
+#     temp_tups = [(word, letters) for word, letters in possible_tups if not any(char in word for char in excluded_letters)]
+#     possible_tups = temp_tups       
     
 def filter_correct_position(guess): 
     global possible_tups

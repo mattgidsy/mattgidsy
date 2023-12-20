@@ -10,31 +10,37 @@ def filter_excluded_letter(guess, guess_cl):
             excluded_letters.append(letter)
             
     # Create 2 lists of tuples, containing the indexed characters of the incorrect guess positions and the correct guess positions      
-    incorrect_guess_positions = []
     correct_positions = []
     for index, char in enumerate(guess):
-        if char not in guess_cl and char.islower():
-            incorrect_guess_positions.append((index, char))
-        elif char not in guess_cl and char.isupper():
+        if char not in guess_cl and char.isupper():
             correct_positions.append((index, char.lower()))
     
-    for word, letter in possible_tups:
-        
-    # Iterate over each tuple in possible_tups
+    #search possible_tups for excluded letters but not excluding letters in in correct position
     for word, letters in possible_tups:
-        # Check if the word contains any excluded letter
-        contains_excluded = False
-        for char in excluded_letters:
-            if char in word:
-                contains_excluded = True
-                break  # Break the inner loop if an excluded letter is found
-
-        # Add the tuple to temp_tups if it does not contain any excluded letter
-        if not contains_excluded:
-            temp_tups.append((word, letters))
-
-    # Reassign possible_tups to the filtered list
+        for index, char in enumerate(word):
+            if (index,char) not in correct_positions and char not in excluded_letters:
+                temp_tups.append(word,letters)
+                
     possible_tups = temp_tups
+    
+                
+                
+        
+    # # Iterate over each tuple in possible_tups
+    # for word, letters in possible_tups:
+    #     # Check if the word contains any excluded letter
+    #     contains_excluded = False
+    #     for char in excluded_letters:
+    #         if char in word:
+    #             contains_excluded = True
+    #             break  # Break the inner loop if an excluded letter is found
+
+    #     # Add the tuple to temp_tups if it does not contain any excluded letter
+    #     if not contains_excluded:
+    #         temp_tups.append((word, letters))
+
+    # # Reassign possible_tups to the filtered list
+    # possible_tups = temp_tups
 
 def filter_incorrect_positions(guess, guess_cl):
     global possible_tups

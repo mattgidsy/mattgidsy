@@ -6,3 +6,7 @@ sound
 lates
 rates
 flake
+guava
+chain
+board
+champ
