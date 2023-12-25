@@ -1,3 +1,7 @@
+#It seems like i need to make the filter excluded letter function work like the filter incorrect positions but instead of filtering out the 
+#incorrect positions of the guess_cl (correct letters wrong position). I need to filter out all of the incorrect letters out of all of the incorrect positions.
+#
+
 
 def filter_excluded_letter(guess, guess_cl):
     global possible_tups

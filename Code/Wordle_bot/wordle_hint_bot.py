@@ -69,7 +69,10 @@ def filter_incorrect_positions(guess, guess_cl):
 #     temp_tups = [(word, letters) for word, letters in possible_tups if not any(char in word for char in excluded_letters)]
 #     possible_tups = temp_tups
 
-##refactored without using list comprehension for debugging      
+##refactored without using list comprehension for debugging 
+#it will currently exclude a word if it contains any repeated letter 
+#in guava's case, it is excluding guava because guAva "A" has to be in the 2 position
+#yet i'm telling it to exclude any words with an a and not ignoring the capital correct positions     
 def filter_excluded_letter(guess, guess_cl):
     global possible_tups
     temp_tups = []
@@ -168,7 +171,7 @@ def ask_guess():
             quit()
         filter_correct_position(guess)
         filter_correct_letter(guess_cl)
-        filter_excluded_letter(guess, guess_cl)
+        # filter_excluded_letter(guess, guess_cl)
         filter_incorrect_positions(guess, guess_cl)
         possible_guess_results()
 
