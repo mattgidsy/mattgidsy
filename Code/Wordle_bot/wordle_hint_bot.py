@@ -57,16 +57,45 @@ def filter_incorrect_positions(guess, guess_cl):
 
     
 
-#remove all of the excluded letters (ie: letters not correct or in correct position)        
+#remove all of the excluded letters (ie: letters not correct or in correct position)
+#the problem is with this function, not the incorrect_positions      
+# def filter_excluded_letter(guess, guess_cl):
+#     global possible_tups
+#     temp_tups = []
+
+#     excluded_letters = [letter for letter in guess if letter.islower() and letter not in guess_cl]
+
+#     # Create a new list with tuples that do not contain any of the excluded letters
+#     temp_tups = [(word, letters) for word, letters in possible_tups if not any(char in word for char in excluded_letters)]
+#     possible_tups = temp_tups
+
+##refactored without using list comprehension for debugging      
 def filter_excluded_letter(guess, guess_cl):
     global possible_tups
     temp_tups = []
 
-    excluded_letters = [letter for letter in guess if letter.islower() and letter not in guess_cl]
+    # Create the list of excluded letters without using list comprehension
+    excluded_letters = []
+    for letter in guess:
+        if letter.islower() and letter not in guess_cl:
+            excluded_letters.append(letter)
 
-    # Create a new list with tuples that do not contain any of the excluded letters
-    temp_tups = [(word, letters) for word, letters in possible_tups if not any(char in word for char in excluded_letters)]
-    possible_tups = temp_tups       
+    # Iterate over each tuple in possible_tups
+    for word, letters in possible_tups:
+        # Check if the word contains any excluded letter
+        contains_excluded = False
+        for char in excluded_letters:
+            if char in word:
+                contains_excluded = True
+                break  # Break the inner loop if an excluded letter is found
+
+        # Add the tuple to temp_tups if it does not contain any excluded letter
+        if not contains_excluded:
+            temp_tups.append((word, letters))
+
+    # Reassign possible_tups to the filtered list
+    possible_tups = temp_tups
+
     
 def filter_correct_position(guess): 
     global possible_tups
