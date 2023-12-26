@@ -15,13 +15,6 @@ possible_tups = []
 #excluded letter(s)
 #incorrect placement
 
-##Debugging##
-#having a problem with input: [slAte, , boArd, , guAva, ,] len(possible_tups) == 0: is triggering after input guAva with no correct letters.
-# in wordle, I should have 2 more guesses "CHAmp" and the correct answer "CHAIN"
-# 'guAva', __ ,  will trigger the bug, at least "champ, chain, slate, board" should all be valid guesses afterward.
-# 'guAva', "a", will return correctish** only 'yaArs', 'smAak' should return but any word with an 'a' in the 'A' position returns <- maybe separate bug
-# 'guAva', __, error only occurs with filter_excluded_letter
-
 
 #for letters that were correct but out of position, remove words with the correct letter's old position
 def filter_incorrect_positions(guess, guess_cl):
@@ -55,24 +48,6 @@ def filter_incorrect_positions(guess, guess_cl):
     else:
         pass
 
-    
-
-#remove all of the excluded letters (ie: letters not correct or in correct position)
-#the problem is with this function, not the incorrect_positions      
-# def filter_excluded_letter(guess, guess_cl):
-#     global possible_tups
-#     temp_tups = []
-
-#     excluded_letters = [letter for letter in guess if letter.islower() and letter not in guess_cl]
-
-#     # Create a new list with tuples that do not contain any of the excluded letters
-#     temp_tups = [(word, letters) for word, letters in possible_tups if not any(char in word for char in excluded_letters)]
-#     possible_tups = temp_tups
-
-##refactored without using list comprehension for debugging 
-#it will currently exclude a word if it contains any repeated letter 
-#in guava's case, it is excluding guava because guAva "A" has to be in the 2 position
-#yet i'm telling it to exclude any words with an a and not ignoring the capital correct positions     
 def filter_excluded_letter(guess, guess_cl):
     global possible_tups
     temp_tups = []
@@ -82,21 +57,27 @@ def filter_excluded_letter(guess, guess_cl):
     for letter in guess:
         if letter.islower() and letter not in guess_cl:
             excluded_letters.append(letter)
-
-    # Iterate over each tuple in possible_tups
+            
+    # Create 2 lists of tuples, containing the indexed characters of the incorrect guess positions and the correct guess positions      
+    incorrect_guess_positions = []
+    correct_positions = []
+    for index, char in enumerate(guess):
+        if char not in guess_cl and char.islower():
+            incorrect_guess_positions.append((index, char))
+        elif char not in guess_cl and char.isupper():
+            correct_positions.append((index, char.lower()))
+    
+    #filter through possible words ignoring letters in the correct positions. allows for repeat letters
     for word, letters in possible_tups:
-        # Check if the word contains any excluded letter
         contains_excluded = False
-        for char in excluded_letters:
-            if char in word:
-                contains_excluded = True
-                break  # Break the inner loop if an excluded letter is found
-
+        for index,char in enumerate(word):
+             if (index,char) not in correct_positions and char in excluded_letters:
+                 contains_excluded = True
+                 break # Break the inner loop if an excluded letter is found
+             
         # Add the tuple to temp_tups if it does not contain any excluded letter
         if not contains_excluded:
-            temp_tups.append((word, letters))
-
-    # Reassign possible_tups to the filtered list
+            temp_tups.append((word,letters))
     possible_tups = temp_tups
 
     
@@ -171,7 +152,7 @@ def ask_guess():
             quit()
         filter_correct_position(guess)
         filter_correct_letter(guess_cl)
-        # filter_excluded_letter(guess, guess_cl)
+        filter_excluded_letter(guess, guess_cl)
         filter_incorrect_positions(guess, guess_cl)
         possible_guess_results()
 
