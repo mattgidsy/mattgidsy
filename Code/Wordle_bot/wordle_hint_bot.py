@@ -3,18 +3,10 @@ with open("Code\Wordle_bot\guess_list.txt") as guess_list:
     lines = guess_list.readlines()
 
 #iterate through the word list (this one contains 5 letter words for wordle)   
-
 word_list = [word.strip() for word in lines]
 possible_words = []
 
-#Need to write 4 searches for wordle solving
-#correct letter(s) placement
-#correct letter(s)
-#excluded letter(s)
-#incorrect placement
-
-
-#for letters that were correct but out of position, remove words with the correct letter's old position
+#filter letters that were correct but out of position, remove words with the correct letter's old position
 def filter_incorrect_positions(guess, guess_cl):
     global possible_words
 
@@ -50,19 +42,16 @@ def filter_excluded_letter(guess, guess_cl):
     global possible_words
     temp_possible_words = []
 
-    # Create the list of excluded letters without using list comprehension
+    # Create the list of excluded letters
     excluded_letters = []
     for letter in guess:
         if letter.islower() and letter not in guess_cl:
             excluded_letters.append(letter)
             
-    # Create 2 lists of tuples, containing the indexed characters of the incorrect guess positions and the correct guess positions      
-    incorrect_guess_positions = []
+    #create a list of tuples containing the correct letters and their indexed positions    
     correct_positions = []
     for index, char in enumerate(guess):
-        if char not in guess_cl and char.islower():
-            incorrect_guess_positions.append((index, char))
-        elif char not in guess_cl and char.isupper():
+        if char not in guess_cl and char.isupper():
             correct_positions.append((index, char.lower()))
     
     #filter through possible words ignoring letters in the correct positions. allows for repeat letters
