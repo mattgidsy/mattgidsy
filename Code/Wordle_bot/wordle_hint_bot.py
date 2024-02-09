@@ -3,29 +3,12 @@ with open("Code\Wordle_bot\guess_list.txt") as guess_list:
     lines = guess_list.readlines()
 
 #iterate through the word list (this one contains 5 letter words for wordle)   
-#create word tuples to use for parsing ie: ('apple', ['a','p','p','l','e'])
 word_list = [word.strip() for word in lines]
-word_tuples = [(word, list(word)) for word in word_list]
-possible_guess_lst = []
-possible_tups = []
+possible_words = []
 
-#Need to write 4 searches for wordle solving
-#correct letter(s) placement
-#correct letter(s)
-#excluded letter(s)
-#incorrect placement
-
-##Debugging##
-#having a problem with input: [slAte, , boArd, , guAva, ,] len(possible_tups) == 0: is triggering after input guAva with no correct letters.
-# in wordle, I should have 2 more guesses "CHAmp" and the correct answer "CHAIN"
-# 'guAva', __ ,  will trigger the bug, at least "champ, chain, slate, board" should all be valid guesses afterward.
-# 'guAva', "a", will return correctish** only 'yaArs', 'smAak' should return but any word with an 'a' in the 'A' position returns <- maybe separate bug
-# 'guAva', __, error only occurs with filter_excluded_letter
-
-
-#for letters that were correct but out of position, remove words with the correct letter's old position
+#filter letters that were correct but out of position, remove words with the correct letter's old position
 def filter_incorrect_positions(guess, guess_cl):
-    global possible_tups
+    global possible_words
 
     # Create the list of tuples (index, letter) for each letter in guess_cl and its corresponding index in guess
     guess_cl_positions = []
@@ -33,11 +16,11 @@ def filter_incorrect_positions(guess, guess_cl):
         if char in guess_cl:
             guess_cl_positions.append((index, char))  # Storing as (index, char)
 
-    # If there are letters to check in guess_cl and possible_tups is not empty
-    if guess_cl_positions and possible_tups:
-        temp_tups_list = []
+    # If there are letters to check in guess_cl and possible_words is not empty
+    if guess_cl_positions and possible_words:
+        temp_possible_words = []
 
-        for word, letters in possible_tups:
+        for word in possible_words:
             # Initialize a flag to indicate a match
             match = False
             for index, char in guess_cl_positions:  # Adjusted order here
@@ -46,86 +29,103 @@ def filter_incorrect_positions(guess, guess_cl):
                     match = True
                     break  # Break the loop if a match is found
 
-            # Add the tuple to temp_tups_list if there is no match
+            # Add the tuple to temp_possible_words if there is no match
             if not match:
-                temp_tups_list.append((word, letters))
+                temp_possible_words.append((word))
 
-        # Update possible_tups with the filtered list
-        possible_tups = temp_tups_list
+        # Update possible_words with the filtered list
+        possible_words = temp_possible_words
     else:
         pass
 
-    
-
-#remove all of the excluded letters (ie: letters not correct or in correct position)        
 def filter_excluded_letter(guess, guess_cl):
-    global possible_tups
-    temp_tups = []
+    global possible_words
+    temp_possible_words = []
 
-    excluded_letters = [letter for letter in guess if letter.islower() and letter not in guess_cl]
+    # Create the list of excluded letters
+    excluded_letters = []
+    for letter in guess:
+        if letter.islower() and letter not in guess_cl:
+            excluded_letters.append(letter)
+            
+    #create a list of tuples containing the correct letters and their indexed positions    
+    correct_positions = []
+    for index, char in enumerate(guess):
+        if char not in guess_cl and char.isupper():
+            correct_positions.append((index, char.lower()))
+    
+    #filter through possible words ignoring letters in the correct positions. allows for repeat letters
+    for word in possible_words:
+        contains_excluded = False
+        for index,char in enumerate(word):
+             if (index,char) not in correct_positions and char in excluded_letters:
+                 contains_excluded = True
+                 break # Break the inner loop if an excluded letter is found
+             
+        # Add the tuple to temp_possible_words if it does not contain any excluded letter
+        if not contains_excluded:
+            temp_possible_words.append(word)
+    possible_words = temp_possible_words
 
-    # Create a new list with tuples that do not contain any of the excluded letters
-    temp_tups = [(word, letters) for word, letters in possible_tups if not any(char in word for char in excluded_letters)]
-    possible_tups = temp_tups       
     
 def filter_correct_position(guess): 
-    global possible_tups
-    temp_tup_list = []
-    #check if there are any uppercase letters and if possible_tups is empty
-    if any(letter.isupper() for letter in guess) and len(possible_tups) == 0:
+    global possible_words
+    temp_possible_list = []
+    #check if there are any uppercase letters and if possible_words is empty
+    if any(letter.isupper() for letter in guess) and len(possible_words) == 0:
         #index the guessed word's letters for parsing
-        guessed_positions = [(char.lower(), index) for index, char in enumerate(guess) if char.isupper()]
-        #search word_tuples
-        for word, letters in word_tuples:
+        guessed_positions = [(index, char.lower()) for index, char in enumerate(guess) if char.isupper()]
+        #search word_list
+        for word in word_list:
             # Check if all guessed letters are in the correct positions
-            if all((g, i) in guessed_positions and g == letters[i] for g, i in guessed_positions):
-                possible_tups.append((word, letters))
-    elif any(letter.isupper() for letter in guess) and len(possible_tups) > 0:
-        guessed_positions = [(char.lower(), index) for index, char in enumerate(guess) if char.isupper()]
-        #if word not in possible_tups append to a temp list and replace global list to deduce
-        for word, letters in possible_tups:
-            if all((g, i) in guessed_positions and g == letters[i] for g, i in guessed_positions):
-                temp_tup_list.append((word, letters))
-        possible_tups = temp_tup_list
+            if all((i,c) in guessed_positions and c == word[i] for i,c in guessed_positions):
+                possible_words.append(word)
+    elif any(letter.isupper() for letter in guess) and len(possible_words) > 0:
+        guessed_positions = [(index, char.lower()) for index, char in enumerate(guess) if char.isupper()]
+        #if word not in possible_words append to a temp list and replace global list to deduce
+        for word in possible_words:
+            if all((i,c) in guessed_positions and c == word[i] for i,c in guessed_positions):
+                temp_possible_list.append(word)
+        possible_words = temp_possible_list
     else: 
         pass
         
 def filter_correct_letter(guess_cl):
     # I know it's yucky to use global but I don't know another way.
-    global possible_tups
+    global possible_words
     guess_letters = list(guess_cl)
-    temp_tup_list = []
-    if len(possible_tups) == 0:
-        for word, letters in word_tuples:
+    temp_possible_list = []
+    if len(possible_words) == 0:
+        for word in word_list:
             # Check if at least one of the specified letters is present in the word
             if all(char in word for char in guess_letters):
-                if word not in possible_tups:
+                if word not in possible_words:
                 # If true, append the word to the filtered list if it's not there
-                    possible_tups.append((word,letters))
+                    possible_words.append(word)
                     
     else:
         #create a new list and replace possible tups 
-        for word, letters in possible_tups:
+        for word in possible_words:
             # Check if at least one of the specified letters is present in the word
             if all(char in word for char in guess_letters):
-                #if word not in possible_tups append to a temp list and replace global list to deduce
-                temp_tup_list.append((word,letters))
-        possible_tups = temp_tup_list
+                #if word not in possible_words append to a temp list and replace global list to deduce
+                temp_possible_list.append(word)
+        possible_words = temp_possible_list
                                          
 def possible_guess_results():
-    if len(possible_tups) == 0:
+    if len(possible_words) == 0:
         try_again = input("\nHow do I say this? \nI have failed you, there are no possible answers.\nTry again? [Y/N]: ")
         if try_again == "Y" or try_again == 'y':
             get_started()
         else:
             quit()
-    elif len(possible_tups) == 1:
-        possible_results = [word for word, _ in possible_tups]
+    elif len(possible_words) == 1:
+        possible_results = possible_words
         print(f"   *:.Congratuations!.:*\n\n {possible_results} is your answer! \n        ... right?")
         quit()
     else:
         possible_results = []
-        for word, letters in possible_tups:
+        for word in possible_words:
             possible_results.append(word)
         print(possible_results)
         
