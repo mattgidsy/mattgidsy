@@ -1,0 +1,6 @@
+python -m pip install pytesseract
+python -m pip install opencv-python
+#install latest tesseract program https://digi.bib.uni-mannheim.de/tesseract/ 
+# I used: https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.3.20231005.exe
+#naviate to pytesseract.py and change tesseract_cmd = 'tesseract' to where you installed tesseract
+#example: tesseract_cmd = 'c:\\Program Files\\Tesseract-OCR\\tesseract.exe'
