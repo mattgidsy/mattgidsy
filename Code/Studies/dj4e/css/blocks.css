@@ -1,0 +1,88 @@
+
+/* This is a partial blocks.css, you need to add more rules
+   to this file to complete the assignment.  Do not add any CSS
+   styling to the original index.htm / start.htm */
+
+   body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:x-large;
+    font-weight: bold;
+}
+
+/* Here is one of many  CSS rules you will need... */
+#one {
+    width: 25%;
+    float: right;
+    border-style: solid;
+    border-color: blue;
+    border-width: 5px;
+    margin:5px;
+    padding:5px;
+    position:fixed;
+    right:2%;
+    bottom:5%;
+
+}
+#two{
+    width: 25%;
+    float: right;
+    border-style: solid;
+    border-color: green;
+    border-width: 5px;
+    margin:5px;
+    padding:5px;
+    position:fixed;
+    right:2%;
+    top: 5%;
+    
+}
+#three{
+    width: 25%;
+    float: left;
+    border-style: solid;
+    border-color: orange;
+    border-width: 5px;
+    margin:5px;
+    padding:5px;
+    position:fixed;
+    top: 5%;
+    right:70%;
+
+}
+#four{
+    width: 25%;
+    float: left;
+    border-style: solid;
+    border-color: yellow;
+    border-width: 5px;
+    margin:5px;
+    padding:5px;
+    position:fixed;
+    bottom:5%;
+    right:70%;
+
+}
+#link{
+    
+    color:white;
+    background-color: #0a4b33;
+    text-align: center;
+    position:fixed;
+    right:50%;
+    top: 0%;
+
+
+}
+a:link{
+    font-family: 'Roboto', Corbel, Avenir, 'Lucida Grande', 'Lucida Sans', sans-serif;
+    color:white;
+    text-decoration:none;
+    font-weight: lighter;
+
+}
+a:visited{
+    font-family: 'Roboto', Corbel, Avenir, 'Lucida Grande', 'Lucida Sans', sans-serif;
+    color:white;
+    text-decoration:none;
+    font-weight: lighter;
+}
