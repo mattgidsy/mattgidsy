@@ -1,0 +1,12 @@
+class Solution(object):
+    def twoSum(self, nums:list , target: int) -> list:
+        for i in range(len(nums)):
+            for j in range(i+1, len(nums)):
+                if i != j and nums[i] + nums[j] == target:
+                    return [i,j]
+        return [] #returns empty list if no solution
+        
+answer = Solution()
+
+print(answer.twoSum(nums = [2,7,11,15], target = 9))
+print(answer.twoSum(nums = [2,3,11,15], target = 9))
