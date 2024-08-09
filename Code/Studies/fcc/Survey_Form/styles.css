@@ -1,0 +1,62 @@
+html {
+    font-family: 'Poppins', sans-serif;
+    color: #c9bca5;
+    background-color: #1c1c1a;
+}
+
+#title{
+    text-align: center;
+    color: whitesmoke;
+}
+#description {
+    font-style:italic;
+    text-align: center;
+}
+
+#survey-form {
+    background-color: #1a1a20;
+    width: 50%;
+    margin:auto;
+    padding: 5%;
+    
+
+}
+input, select {
+    display:block;
+    background-color: #1c1c1a;
+    
+}
+.input-radio {
+    display: inline-block;
+}
+
+.clue {
+    font-style: italic;
+}
+
+.input-checkbox {
+    display: inline-block;
+    
+    
+    
+}
+
+
+
+label   {
+    display: block;
+    accent-color: #803880;
+    
+}
+.input-textarea {
+    background-color: #2b2a33;
+    width: 100%;
+    
+}
+
+.text-input-box {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: none;
+    border-style: solid;
+}
