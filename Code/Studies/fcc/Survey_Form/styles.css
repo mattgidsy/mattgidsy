@@ -1,4 +1,4 @@
-html {
+body {
     font-family: 'Poppins', sans-serif;
     color: #c9bca5;
     background-color: #1c1c1a;
@@ -16,7 +16,7 @@ html {
 #survey-form {
     background-color: #1a1a20;
     width: 50%;
-    margin:auto;
+    margin: auto;
     padding: 5%;
     
 
@@ -36,27 +36,76 @@ input, select {
 
 .input-checkbox {
     display: inline-block;
-    
-    
-    
 }
-
-
 
 label   {
     display: block;
     accent-color: #803880;
+    font-size: medium;
+    
     
 }
 .input-textarea {
     background-color: #2b2a33;
+    min-height: 100px;
     width: 100%;
+    color:#c9bca5;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: medium;
+}
+
+.text-input-box , #dropdown {
+    width: 100%;
+    border-radius: 10px;
+    border-style: solid;
+    padding: 8px 4px 8px 4px;
+    margin: 8px 0;
+    font-size: medium;
+    color:#c9bca5;
+    border-width: 2px;
+    
     
 }
 
-.text-input-box {
+#submit {
     width: 100%;
-    border-radius: 10px;
-    box-shadow: none;
-    border-style: solid;
+    border: none;
+    font-size: large;
+    min-height: 30px;
+    background-color: #145c2c;
+    color:#c9bca5;
+    margin: 8px 0 0 0;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#dropdown {
+    width: 100%;
+}
+
+
+option:hover {
+    background-color: #2b2a33;
+}
+
+option:checked {
+    background:linear-gradient(90deg, #2b2a33, #2b2a33)
+}
+
+select {
+    overflow: hidden;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

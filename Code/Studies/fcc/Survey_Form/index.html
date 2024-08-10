@@ -27,11 +27,11 @@
                     </div>
                     <div class="form-group">
                         <label for="dropdown">Which option best describes your current role?</label>
-                        <select name="dropdown" id="dropdown">
-                            <option disabled="" selected="" value="" required="">Please select a role</option>
-                            <option value="Student" >Student</option>
-                            <option value="Employee">Employee</option>
-                            <option value="Hobbiest">Hobbiest</option>
+                        <select onfocus="this.size=4;" onblur="this.size=0;" onchange="this.size=1; this.blur()" name="dropdown" id="dropdown">
+                            <option disabled selected value="" required="">Please select a role</option>
+                            <option class="dropdown-option" value="Student" >Student</option>
+                            <option class="dropdown-option" value="Employee">Employee</option>
+                            <option class="dropdown-option" value="Hobbiest">Hobbiest</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -62,7 +62,7 @@
                         <textarea class="input-textarea" name="comment-box" id="comment-box" placeholder="Enter your comments here"></textarea>
                     </div>
                     <div class="form-group">
-                        <button id="submit" class="submit-button" type="submit">submit</button>
+                        <button id="submit" class="submit-button" type="submit">Submit</button>
                     </div>
                 </form>
             </div>
