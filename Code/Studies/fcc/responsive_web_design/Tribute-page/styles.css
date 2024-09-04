@@ -1,0 +1,21 @@
+html {
+  background-color: rgb(32, 32, 32);
+}
+main {
+  justify-content: center;
+  color: rgb(128, 116, 102);
+}
+
+div {
+  background-color: rgb(25, 21, 29);
+  display: block;
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  max-width: 612px;
+  padding: 0.5rem 1rem 1rem;
+}
+#tribute-info {
+  text-align: left;
+}
