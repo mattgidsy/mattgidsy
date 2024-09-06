@@ -62,7 +62,7 @@ ul {
 /* Media query for responsiveness */
 @media (max-width: 768px) {
   #navbar {
-    position: relative;
+    position: fixed;
     width: 100%;
     height: auto;
   }
