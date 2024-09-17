@@ -4,48 +4,115 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <script
+      src="https://kit.fontawesome.com/5e7788783a.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Smort Bottle</title>
   </head>
   <body>
-    <header id="header">
-      <div class="logo">
-        <img
-          src="https://www.svgrepo.com/show/493896/water-resources.svg"
-          alt="smort bottle logo"
-          class="logo-img"
-          id="header-img"
-        />
-        <h1 class="logo-text">Smort Water</h1>
+    <div class="page-wrapper">
+      <header id="header">
+        <div class="logo-wrapper">
+          <img style="display: none" id="header-img" />
+          <i class="fa-solid fa-droplet"></i>
+          <h1 class="logo-text">Smort Bottle</h1>
+        </div>
+        <nav id="nav-bar">
+          <a href="#products" class="nav-link" id="nav-products">Products</a>
+          <a href="#features" class="nav-link" id="nav-features">Features</a>
+          <a href="#app" class="nav-link" id="nav-app">App</a>
+          <a href="#notify" class="nav-link" id="nav-notify">Notify</a>
+        </nav>
+      </header>
+      <div id="container">
+        <section id="products" class="card"></section>
+        <div class="product-grid">
+          <div class="product-card">
+            <img
+              src="https://files.oaiusercontent.com/file-pw5pFcAP7pwuzZv79wY9dtlq?se=2024-09-17T02%3A00%3A47Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Df6c3fd44-c382-4c57-b935-82a537311b7d.webp&sig=YwMlI7VuAud2fYXWCiYMOgliN3tupDCufyFJ24WVN/Q%3D"
+              alt="bottle product"
+            />
+          </div>
+          <div class="product-card">
+            <img
+              src="https://files.oaiusercontent.com/file-j3Q7IBTTKm0drjOTInx5Tbky?se=2024-09-17T02%3A00%3A47Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D72b0b9d5-99f8-4aac-b129-7c84229ba41f.webp&sig=tEXG0ferWq4p/Wq4/kal/qY7zQbE3SF9VZyIZJijHzQ%3D"
+              alt="bottle product"
+            />
+          </div>
+          <div class="product-card">
+            <img
+              src="https://files.oaiusercontent.com/file-cFxa4FPYRmGFcb3nUN1Q7Si1?se=2024-09-17T02%3A07%3A14Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dfc99bcfe-da75-475d-835b-2b3d16e00403.webp&sig=dTB/clcng3hSFNvxh4DQl2RtWEpVvKAhvD9IeGqDBSg%3D"
+              alt="bottle product"
+            />
+          </div>
+        </div>
+        <section id="features" class="ft-card">
+          <div class="ft-wrapper">
+            <div id="ft-details" class="feature-text">
+              <div class="ft-point-grid">
+                <i class="fa-solid fa-compass"></i>
+                <div class="ft-point-text">
+                  <h2>Hydration Tracking</h2>
+                  <p>
+                    Stay on top of your hydration goals with real-time tracking.
+                    The smart water bottle monitors your water intake throughout
+                    the day and provides instant feedback on your progress,
+                    ensuring you stay hydrated and healthy.
+                  </p>
+                </div>
+              </div>
+              <div class="ft-point-grid">
+                <i class="fa-solid fa-clock"></i>
+                <div class="ft-point-text">
+                  <h2>Custom Hydration Reminders</h2>
+                  <p>
+                    Never forget to hydrate with customizable LED reminders. Set
+                    your preferred drinking intervals, and the bottle will
+                    gently alert you with a subtle glow, helping you develop a
+                    consistent hydration routine.
+                  </p>
+                </div>
+              </div>
+              <div class="ft-point-grid">
+                <i class="fa-solid fa-temperature-low"></i>
+                <div class="ft-point-text">
+                  <h2>Temperature Control</h2>
+                  <p>
+                    Keep your beverages at the perfect temperature all day long.
+                    Whether it’s ice-cold water or hot tea, the smart bottle’s
+                    insulated design maintains your drink’s temperature for up
+                    to 24 hours.
+                  </p>
+                </div>
+              </div>
+              <div class="ft-point-grid">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <div class="ft-point-text">
+                  <h2>Mobile App Integration</h2>
+                  <p>
+                    Sync your hydration data with our mobile app for a complete
+                    overview of your daily water intake. Set personalized
+                    hydration goals, track progress over time, and receive
+                    reminders directly to your smartphone.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div id="ft-video" class="feature-video">
+              <iframe
+                id="video"
+                src="https://player.vimeo.com/video/160439334?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </section>
+        <section id="app" class="card"></section>
+        <section id="notify" class="card"></section>
       </div>
-      <nav id="nav-bar">
-        <a href="#products" class="nav-link" id="nav-products">Products</a>
-        <a href="#features" class="nav-link" id="nav-features">Features</a>
-        <a href="#app" class="nav-link" id="nav-app">App</a>
-        <a href="#notify" class="nav-link" id="nav-notify">Notify</a>
-      </nav>
-    </header>
-    <div id="container">
-      <section id="products" class="card"></section>
-      <section id="features" class="card">
-        <article id="ft-details">
-          <h2>a heading</h2>
-          <p>a description</p>
-          <h2>a heading</h2>
-          <p>a description</p>
-          <h2>a heading</h2>
-          <p>a description</p>
-          <h2>a heading</h2>
-          <p>a description</p>
-        </article>
-        <article>
-          <iframe
-            id="video"
-            src="https://player.vimeo.com/video/160439334?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-          ></iframe>
-        </article>
-      </section>
-      <section id="app" class="card"></section>
-      <section id="notify" class="card"></section>
     </div>
   </body>
 </html>

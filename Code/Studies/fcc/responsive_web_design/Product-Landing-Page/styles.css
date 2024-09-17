@@ -1,23 +1,110 @@
-
-
-.logo-img {
-  width:100px;
-  
+* {
+  padding: 0;
+  margin: 0;
 }
 
-.logo {
-  display: inline-block;
-  color: blue;
-
+html {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  background-color: #252d33;
 }
 
+.page-wrapper {
+  padding: 0;
+  margin: auto;
+  width: 100%;
+}
+
+header {
+  display: flex;
+  padding: 20px;
+  background-color: #252d33;
+  border-radius: 25px;
+}
+.logo-wrapper {
+  width: 60%;
+}
+.logo-wrapper i {
+  font-size: 2em;
+}
 .logo-text {
-  padding: 0; 
-  margin: -25px;
+  display: inline-block;
+  color: #42a4f0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-h1 {
-  display: inline-block;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-
+.fa-solid {
+  color: #42a4f0;
+}
+#nav-bar {
+  width: 100%;
+  float: right;
+  padding: 0;
+  margin: 0;
+  text-align: right;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 25px;
+}
+
+.product-grid {
+  margin: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 1em;
+}
+
+.ft-card {
+  width: 100%;
+  background-image: url(https://files.oaiusercontent.com/file-JJKyvsSx7nZwQ6XB8BEgWaGd?se=2024-09-17T03%3A29%3A38Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Db3f764f3-1049-4b41-ad3a-a136d8111bc6.webp&sig=6OyR7Rbl7jMJ3KLaUoV4RNlv4VgxlkdFzhfPFG1phrE%3D);
+}
+
+/* feature point grid */
+.ft-point-grid {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 3em 1fr;
+  column-gap: 1em;
+  color: linen;
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+/* feature point grid icons */
+.ft-point-grid i {
+  justify-content: center;
+  font-size: 3em;
+}
+
+.ft-wrapper {
+  width: 100%;
+  background-color: #252d3394;
+}
+
+.ft-point-text {
+  padding: 1em;
+}
+
+.feature-video {
+  position: relative;
+  width: 90%; /* Full width */
+  max-width: 1200px; /* Optional: You can set a maximum width */
+  margin: 0 auto; /* Center the container */
+  padding: 4em;
+  box-sizing: border-box;
+}
+
+.feature-video::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+#video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
