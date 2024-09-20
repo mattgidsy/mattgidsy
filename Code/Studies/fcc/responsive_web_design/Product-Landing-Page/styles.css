@@ -6,41 +6,80 @@
 html {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   background-color: #252d33;
+  color: linen;
+}
+
+/* icon colors */
+.fa-solid {
+  color: #42a4f0;
 }
 
 .page-wrapper {
-  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
   margin: auto;
-  width: 100%;
+  width: 90%;
 }
 
 header {
+  position: fixed;
+  z-index: 10;
+  top: 0;
   display: flex;
-  padding: 20px;
-  background-color: #252d33;
-  border-radius: 25px;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  background-color: #1e2429;
+  padding: 1em;
+  padding-bottom: 0;
 }
+
 .logo-wrapper {
-  width: 60%;
+  width: 100%;
+  padding-left: 2em;
 }
+
 .logo-wrapper i {
   font-size: 2em;
 }
+
 .logo-text {
   display: inline-block;
   color: #42a4f0;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-.fa-solid {
-  color: #42a4f0;
-}
 #nav-bar {
   width: 100%;
-  float: right;
-  padding: 0;
-  margin: 0;
+  padding-right: 2em;
   text-align: right;
+}
+
+.nav-link {
+  border-radius: 0.2em 0.2em 0 0;
+  padding: 0.5em;
+  padding-bottom: 0;
+  text-decoration: none;
+  color: linen;
+  font-size: 1.3em;
+  text-align: center;
+}
+
+.nav-link:hover {
+  border-bottom: solid 1px linen;
+}
+
+section {
+  scroll-margin-top: 60px;
+}
+
+#container {
+  width: 100%;
+  padding: 0;
+  margin-top: 10%;
 }
 
 .product-card img {
@@ -57,7 +96,7 @@ header {
 
 .ft-card {
   width: 100%;
-  background-image: url(https://files.oaiusercontent.com/file-JJKyvsSx7nZwQ6XB8BEgWaGd?se=2024-09-17T03%3A29%3A38Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Db3f764f3-1049-4b41-ad3a-a136d8111bc6.webp&sig=6OyR7Rbl7jMJ3KLaUoV4RNlv4VgxlkdFzhfPFG1phrE%3D);
+  background-image: url(https://cdn.discordapp.com/attachments/1285753810131881994/1285794543115178026/b3f764f3-1049-4b41-ad3a-a136d8111bc6.webp?ex=66eb90fb&is=66ea3f7b&hm=3332ccd7ac6534cd3d082c6886cb992dfcd11bdfd1b5c18a11d6e947c0fcfec3&);
 }
 
 /* feature point grid */
@@ -88,9 +127,8 @@ header {
 
 .feature-video {
   position: relative;
-  width: 90%; /* Full width */
-  max-width: 1200px; /* Optional: You can set a maximum width */
-  margin: 0 auto; /* Center the container */
+  width: 90%;
+  margin: 0 auto;
   padding: 4em;
   box-sizing: border-box;
 }
@@ -98,7 +136,7 @@ header {
 .feature-video::before {
   content: "";
   display: block;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
+  padding-top: 56.25%;
 }
 
 #video {
@@ -107,4 +145,94 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.app-card {
+  background-color: gray;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2em;
+  align-items: center;
+  width: 100%;
+  margin: 2em auto;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.app-img-wrapper {
+  width: 100%;
+}
+.app-img {
+  width: 100%;
+  border-radius: 2em;
+}
+
+.app-text-wrapper {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.notify-card {
+  background-color: #313538;
+  width: 60%;
+  margin: 1em auto;
+  padding: 4em 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+input {
+  margin-top: 1em;
+  background-color: #1e2022;
+  border: 1px black;
+  color: gray;
+  text-align: center;
+  font-size: 1.5em;
+  padding: 0.2em;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid #9c9ba0;
+  box-shadow: 0 0 5px rgba(147, 147, 156, 0.5);
+}
+
+.submit-btn {
+  display: block;
+  margin: 1em auto;
+  padding: 0.5em 1em;
+  border: none;
+  background-color: #2d7f56;
+  color: linen;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.submit-btn:hover {
+  border: 2px solid #9c9ba0;
+}
+
+.submit-btn:active {
+  box-shadow: 0 0 5px rgba(147, 147, 156, 0.5);
+}
+
+footer {
+  margin: 2em auto 1em;
+  text-align: center;
+  border-top: solid 1px;
+  padding: 0.5em;
+}
+
+#git-link {
+  text-decoration: none;
+  color: linen;
+}
+
+@media only screen and (max-width: 738px) {
+  .nav-link {
+    font-size: 1.1em;
+    padding-right: 0.2em;
+  }
 }
