@@ -14,7 +14,11 @@
     <div class="page-wrapper">
       <header id="header">
         <div class="logo-wrapper">
-          <img style="display: none" id="header-img" />
+          <img
+            style="display: none"
+            id="header-img"
+            src="http://requiredforproject.com"
+          />
           <i class="fa-solid fa-droplet"></i>
           <h1 class="logo-text">Smort Bottle</h1>
         </div>
@@ -29,10 +33,10 @@
         <section id="products" class="card"></section>
         <div class="product-grid">
           <div class="product-card">
-            <img src="Images/smort-bottle-1.webp" alt="bottle product" />
+            <img src="images/smort-bottle-1.webp" alt="bottle product" />
           </div>
           <div class="product-card">
-            <img src="Images/smort-bottle-2.webp" alt="bottle product" />
+            <img src="images/smort-bottle-2.webp" alt="bottle product" />
           </div>
           <div class="product-card">
             <img src="images\smort-bottle-3.webp" alt="bottle product" />
@@ -110,21 +114,27 @@
             </p>
           </div>
           <div class="app-img-wrapper">
-            <img class="app-img" src="Images\smort-app.webp" alt="app image" />
+            <img class="app-img" src="images\smort-app.webp" alt="app image" />
           </div>
         </section>
         <section id="notify" class="notify-card">
           <div>
-            <form id="form">
+            <form id="form" action="https://www.freecodecamp.com/email-submit">
               <h2>Be the first to know!</h2>
               <p>sign up for more updates</p>
               <input
+                id="email"
                 type="email"
                 name="email"
-                id="email"
                 class="email-input"
                 placeholder="your.email@foobar.com"
                 required
+              />
+              <input
+                type="submit"
+                id="submit"
+                style="display: none"
+                class="requiredforproject"
               />
               <button type="submit" class="submit-btn" id="submit">
                 Notify
