@@ -16,7 +16,7 @@
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 html {
@@ -32,18 +32,32 @@ body {
 .navbar {
   background-color: var(--grey-400);
   height: 5vh;
+  width: 100vw;
   display: flex;
+  /* align-items: center; */
   justify-content: space-between;
-  align-items: end;
 }
 
+.nav-social {
+  align-self: center;
+  text-align: left;
+  padding-left: 1vw;
+  width: 33vw;
+}
 .nav-menu {
+  align-self: flex-end;
   color: #252527;
+  align-items: baseline;
+  text-align: center;
+  padding-bottom: 0.2vh;
+  width: 33vw;
 }
 
 .nav-contact {
-  padding-bottom: 2vh;
+  align-self: center;
+  text-align: right;
   padding-right: 1vw;
+  width: 33vw;
 }
 
 .follow-btn {
@@ -66,18 +80,15 @@ a:active {
 }
 
 #nav-email-icon {
-  border-radius: 10rem;
   color: var(--white-100);
   background-color: var(--grey-200);
-  padding: 1rem;
-  font: 20rem;
+  font: 30rem;
 }
 
 button {
   display: inline-block;
   border: none;
   padding: 1rem 2rem;
-  border-radius: 2rem;
   margin: 0;
   text-decoration: none;
   background: var(--grey-200);
@@ -87,8 +98,6 @@ button {
   cursor: pointer;
   text-align: center;
   transition: background 250ms ease-in-out, transform 150ms ease;
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 
 button:hover,
@@ -103,4 +112,20 @@ button:focus {
 
 button:active {
   transform: scale(0.99);
+}
+.follow-btn {
+  border-radius: 2rem;
+}
+
+.email-btn {
+  color: var(--white-100);
+  padding: 1rem;
+  border-radius: 3rem;
+}
+
+.welcome-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
