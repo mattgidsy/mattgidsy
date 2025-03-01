@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: antiquewhite;
+}
+
+ body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #1c1c1a;
+
+ }
+
+ .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+    
+ }
+
+ .palindrome-div {
+    background-color: #303030;
+    width: 50%;
+    height: 30%;
+    border-radius: 2rem;
+    padding: 3rem 1rem;
+    margin-top: 2rem;
+    text-align: center;
+    
+ }
+
+ .palindrome-def-div {
+    background-color: rgb(14, 62, 14);
+    border-radius: 2rem;
+    width: 50%;
+    height: 30%;
+    margin-top: 2rem;
+    padding: 2rem 2rem;
+    
+    
+ }
+ 
+
