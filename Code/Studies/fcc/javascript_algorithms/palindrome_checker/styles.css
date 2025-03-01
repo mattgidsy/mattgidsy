@@ -23,6 +23,7 @@
  }
 
  .palindrome-div {
+    min-width: 400px;
     background-color: #303030;
     width: 50%;
     height: 30%;
@@ -34,6 +35,7 @@
  }
 
  .palindrome-def-div {
+    min-width: 400px;
     background-color: rgb(14, 62, 14);
     border-radius: 2rem;
     width: 50%;
@@ -44,4 +46,22 @@
     
  }
  
+ input {
+    background-color: #303030;
+    width: 60%;
+    justify-content: flex-start;
+    margin-top: 1rem;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgb(81, 79, 81);
 
+ }
+
+
+button {
+    background-color: rgb(56, 20, 104);
+    border: none;
+    border-radius: .3rem;
+    width: 20%;
+    height: 50%;
+}
