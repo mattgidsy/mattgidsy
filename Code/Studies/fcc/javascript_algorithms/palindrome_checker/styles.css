@@ -1,67 +1,75 @@
+/* Global Styles */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    color: antiquewhite;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: antiquewhite;
 }
 
- body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #1c1c1a;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #1c1c1a;
+}
 
- }
+/* Main Container */
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+}
 
- .container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10%;
-    
- }
+/* Palindrome Input Section */
+.palindrome-div {
+  min-width: 400px;
+  width: 50%;
+  background-color: #303030;
+  border-radius: 2rem;
+  padding: 3rem 1rem;
+  margin-top: 2rem;
+  text-align: center;
+}
 
- .palindrome-div {
-    min-width: 400px;
-    background-color: #303030;
-    width: 50%;
-    height: 30%;
-    border-radius: 2rem;
-    padding: 3rem 1rem;
-    margin-top: 2rem;
-    text-align: center;
-    
- }
+/* Input + Button Layout */
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
 
- .palindrome-def-div {
-    min-width: 400px;
-    background-color: rgb(14, 62, 14);
-    border-radius: 2rem;
-    width: 50%;
-    height: 30%;
-    margin-top: 2rem;
-    padding: 2rem 2rem;
-    
-    
- }
- 
- input {
-    background-color: #303030;
-    width: 60%;
-    justify-content: flex-start;
-    margin-top: 1rem;
-    outline: none;
-    border: none;
-    border-bottom: 2px solid rgb(81, 79, 81);
-
- }
-
+input {
+  background-color: #303030;
+  width: 40%;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid rgb(81, 79, 81);
+  padding: 0.5rem;
+  font-size: 1rem;
+}
 
 button {
-    background-color: rgb(56, 20, 104);
-    border: none;
-    border-radius: .3rem;
-    width: 20%;
-    height: 50%;
+  background-color: rgb(56, 20, 104);
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+/* Palindrome Definition Section */
+.palindrome-def-div {
+  min-width: 400px;
+  width: 50%;
+  background-color: rgb(14, 62, 14);
+  border-radius: 2rem;
+  margin-top: 2rem;
+  padding: 2rem;
+}
+
+.results-div {
+  padding-top: 1rem;
 }
