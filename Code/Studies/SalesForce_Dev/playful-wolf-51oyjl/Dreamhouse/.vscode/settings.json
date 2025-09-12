@@ -4,5 +4,8 @@
     "**/bower_components": true,
     "**/.sfdx": true
   },
-  "salesforcedx-vscode-apex.java.home": "C:\\Program Files\\Java\\jdk-21"
+  "salesforcedx-vscode-apex.java.home": "C:\\Program Files\\Java\\jdk-21",
+  "cSpell.words": [
+    "SOQL"
+  ]
 }
